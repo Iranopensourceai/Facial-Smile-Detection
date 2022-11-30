@@ -4,6 +4,8 @@
 </p>
 
 ## data collection 
+# dataCollection group : we downloaded dataset from kaggle.com
+this data set have Smile,NoSmile,Test Folders 
 
 ## train test split
 
