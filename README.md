@@ -10,6 +10,7 @@ this data set have Smile,NoSmile,Test Folders
 ## train test split
 
 ## Data pre-processing and data augmentation
+The first version of preprocessing, spliting and agumentation on FirstDataSet commited.
 
 ## data visualization
 
