@@ -1,0 +1,8 @@
+dataset_path = r"G:\tajvar\Real Projects\Smile detection\Data Pre processing-Smile\Data\datasets"
+
+height = 32
+width = 32
+depth =1
+classes=2
+
+input_shape = (width, height, depth)
