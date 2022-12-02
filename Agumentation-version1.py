@@ -1,15 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[4]:
-
-
-dataset_path = r"G:\tajvar\Real Projects\Smile detection\Data Pre processing-Smile\Data\datasets"
-
-
-# In[5]:
-
-
 import numpy as np
 import os
 import argparse
@@ -29,9 +17,7 @@ from imutils import paths
 import cv2
 import os
 from sklearn.model_selection import train_test_split
-
-
-# In[6]:
+from config_file import *
 
 
 def train_val_test_split(dataset_path, seed=432):
@@ -45,11 +31,6 @@ def train_val_test_split(dataset_path, seed=432):
     train_path, validation_path = train_test_split(train_val_path, test_size=0.2)
     
     return train_path, validation_path, test_path
-
-train_path, val_path, test_path = train_val_test_split(dataset_path)
-
-
-# In[7]:
 
 
 def dataextractor(image_paths,height=32,width=32):
@@ -68,18 +49,8 @@ def dataextractor(image_paths,height=32,width=32):
     return np.array(data, dtype='float') / 255.0, np.array(labels)
     # splitting the data into train and test
 
-train_X, train_y =dataextractor(train_path)
-val_X, val_y = dataextractor(val_path)
-test_X, test_y = dataextractor(test_path)
-
 # (train_X,test_X,train_y,test_y) = train_test_split(data,labels,test_size=0.2,random_state=123)
 
-height = 32
-width = 32
-depth =1
-classes=2
-
-input_shape = (width, height, depth)
 
 def augmentation(img, training=True):
     return keras.Sequential([
@@ -88,20 +59,25 @@ def augmentation(img, training=True):
     preprocessing.RandomFlip(mode='vertical'), # meaning, top-to-bottom
     preprocessing.RandomWidth(factor=0.15), # horizontal stretch
     preprocessing.RandomRotation(factor=0.20),
-    preprocessing.RandomTranslation(height_factor=0.1, width_factor=0.1),
-])(img, training)
+    preprocessing.RandomTranslation(height_factor=0.1, width_factor=0.1)])(img, training)
 
 
-ex = train_X[100]
 
-plt.figure(figsize=(10,10))
-for i in range(16):
-    image = augmentation(ex)
-#     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-#     image = img_to_array(image)
-    plt.subplot(4, 4, i+1)
-    plt.imshow(tf.squeeze(image) )
-    plt.axis('off')
-plt.show()
+if __name__ == "main":
+  train_path, val_path, test_path = train_val_test_split(dataset_path)
 
+  train_X, train_y =dataextractor(train_path)
+  val_X, val_y = dataextractor(val_path)
+  test_X, test_y = dataextractor(test_path)
 
+  ex = train_X[100]
+
+  plt.figure(figsize=(10,10))
+  for i in range(16):
+      image = augmentation(ex)
+  #     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+  #     image = img_to_array(image)
+      plt.subplot(4, 4, i+1)
+      plt.imshow(tf.squeeze(image) )
+      plt.axis('off')
+  plt.show()
