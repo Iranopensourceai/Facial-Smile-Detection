@@ -10,5 +10,5 @@ config["DEFAULT"] = {
 }
 
 
-with open("config_file.ini", "w") as f:
+with open("config.ini", "w") as f:
   config.write(f)
