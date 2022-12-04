@@ -60,10 +60,5 @@ The CNN that is composed of:
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 ## Results              <a name="Results"></a>
