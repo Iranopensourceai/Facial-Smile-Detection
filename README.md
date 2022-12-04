@@ -1,23 +1,32 @@
 <h1 align="center">Facial Smile Detection</h1>
 <p align="center" width="100%">
     <img width="40%" src="https://github.com/Iranopensourceai/Facial-Smile-Detection/blob/main/figs/Smile.jpg">
-</p>
+</p>       
 
-## data collection 
-dataCollection group : we downloaded dataset from kaggle.com
-this data set have Smile,NoSmile,Test Folders 
+## Table of contents
+- [Overview](#Overview)
+- [Datasets](#Datasets)
+- [Preprocessing](#Preprocessing)
+    - [image preprocessing](#image_preprocessing)
+    - [image augmentation](#image_augmentation)
+- [Model](#Model)
+    - [Building the model](#Building_model)
+    - [Training](#Training)
+- [Results](#Results)
 
-## train test split
+## Overview     <a name="Overview"></a>
 
-## Data pre-processing and data augmentation
-The first version of preprocessing, spliting and agumentation on FirstDataSet commited.
+## Datasets     <a name="Datasets"></a>
 
-## data visualization
+## Preprocessing     <a name="Preprocessing"></a>
+- ### image preprocessing      <a name="image_preprocessing"></a>
+- ### image augmentation       <a name="image_augmentation"></a>
 
-## Model
+
+## Model       <a name="Model"></a>
 <img align="left" width="33%" src="https://github.com/Iranopensourceai/Facial-Smile-Detection/blob/main/figs/model.JPG">     
      
-### Building the model
+### Building the model     <a name="Building_model"></a>
 The CNN that is composed of:
 
 - Conv2D layer with 32 filters, a kernel size of (3, 3), the relu activation function, a padding equal to same and the correct input_shape    
@@ -32,8 +41,30 @@ The CNN that is composed of:
 - dense function related to the task: binary classification > sigmoid   
 
 
-### Training and visualizing the results
-        
-        
-        
- 
+### Training            <a name="Training"></a>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## Results              <a name="Results"></a>
