@@ -1,23 +1,14 @@
+import cv2
+import os
+from imutils import paths
 import numpy as np
-import os
-import argparse
-import cv2
-from imutils import paths
-import matplotlib.pyplot as plt
 import tensorflow as tf
-from tensorflow.keras.preprocessing.image import img_to_array
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Layer,Conv2D,Activation,MaxPool2D,Dense,Flatten,Dropout
-from tensorflow.keras.optimizers import SGD
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
-from tensorflow.keras.layers.experimental import preprocessing
 from tensorflow import keras
-from imutils import paths
-import cv2
-import os
+from tensorflow.keras.preprocessing.image import img_to_array
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from config_file import *
+from tensorflow.keras.layers.experimental.preprocessing import *
+ 
 
 
 def train_val_test_split(dataset_path, seed=432):
@@ -34,9 +25,14 @@ def train_val_test_split(dataset_path, seed=432):
 
 
 def dataextractor(image_paths,height=32,width=32):
+    """
+    This function read and resize input images,
+    set the grayscale of the images
+    label them, then return two arrays of data and labels
+    """
     data=[]
     labels = []
-#     imagepaths = list(paths.list_images(data_path))
+ 
     for imagepath in image_paths:
         image = cv2.imread(imagepath)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -47,19 +43,19 @@ def dataextractor(image_paths,height=32,width=32):
         labels.append(label)
         data.append(image)
     return np.array(data, dtype='float') / 255.0, np.array(labels)
-    # splitting the data into train and test
+    
 
-# (train_X,test_X,train_y,test_y) = train_test_split(data,labels,test_size=0.2,random_state=123)
-
-
+ 
 def augmentation(img, training=True):
+    """
+    This function is used for data augumentation
+    """
     return keras.Sequential([
-    preprocessing.RandomContrast(factor=0.5),
-    preprocessing.RandomFlip(mode='horizontal'), # meaning, left-to-right
-    preprocessing.RandomFlip(mode='vertical'), # meaning, top-to-bottom
-    preprocessing.RandomWidth(factor=0.15), # horizontal stretch
-    preprocessing.RandomRotation(factor=0.20),
-    preprocessing.RandomTranslation(height_factor=0.1, width_factor=0.1)])(img, training)
+    RandomContrast(factor=0.5),
+    RandomFlip(mode='horizontal'), # meaning, left-to-right
+    RandomWidth(factor=0.15), # horizontal stretch
+    RandomRotation(factor=0.20),
+    RandomTranslation(height_factor=0.1, width_factor=0.1)])(img, training)
 
 
 
@@ -75,8 +71,6 @@ if __name__ == "main":
   plt.figure(figsize=(10,10))
   for i in range(16):
       image = augmentation(ex)
-  #     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-  #     image = img_to_array(image)
       plt.subplot(4, 4, i+1)
       plt.imshow(tf.squeeze(image) )
       plt.axis('off')
