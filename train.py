@@ -23,10 +23,10 @@ args = parser.parse_args()
 
 if __name__ == "__main__":
     # get image paths and split into train and test
-    train_path, test_path = train_val_test_split(args.d)
+    train_path, test_path = path_split(args.d)
 
     # Preprocessing and Labeling
-    train_X, train_y =dataextractor(train_path, args.e, args.w, args.g)
+    train_X, train_y = dataextractor(train_path, args.e, args.w, args.g)
     test_X, test_y = dataextractor(test_path, args.e, args.w, args.g)
 
     # if args.g is set to true, the images will be grayed out and the model will receive images with 1 channel
