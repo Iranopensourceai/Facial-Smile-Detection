@@ -1,9 +1,7 @@
 # import necessary libraries
 import os
-from ast import arg
 import pathlib
 import argparse
-from re import M
 from imutils import paths
 from preprocessing import *
 from model import *
@@ -38,8 +36,8 @@ if __name__ == "__main__":
     # Callbacks
     os.mkdir('MODEL_PATH')
     Callbacks = [
-        callbacks.ModelCheckpoint('MODEL_PATH/', monitor='val_acc', save_best_only=True, save_weights_only=True, verbose=0),
-        callbacks.EarlyStopping(monitor='val_acc', patience=5, verbose=0)]
+        callbacks.ModelCheckpoint('MODEL_PATH/', monitor='val_accuracy', save_best_only=True, save_weights_only=True, verbose=0),
+        callbacks.EarlyStopping(monitor='val_acc', patience=4, verbose=0)]
 
     # compile the model
     model = compile_model(model) 
