@@ -12,6 +12,7 @@
 - [Model](#Model)
     - [Building the model](#Building_model)
     - [Training](#Training)
+    - [Evaluation](#Evaluation)
 - [Results](#Results)
 
 ## Overview     <a name="Overview"></a>
@@ -65,5 +66,7 @@ The CNN that is composed of:
 <br>
 <br>
 <br>
+### Evaluation            <a name="Evaluation"></a>
 
+An explanation of some metrics for evaluating our classification model is provided [here](https://github.com/Iranopensourceai/Facial-Smile-Detection/files/10158556/classification_evaluation_metrics.pdf).
 ## Results              <a name="Results"></a>
