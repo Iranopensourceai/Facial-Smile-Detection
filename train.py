@@ -38,7 +38,7 @@ if __name__ == "__main__":
     # Callbacks
     os.mkdir('MODEL_PATH')
     Callbacks = [
-        callbacks.ModelCheckpoint('MODEL_PATH/', monitor='val_accuracy', save_best_only=True, save_weights_only=True, verbose=0),
+        callbacks.ModelCheckpoint('MODEL_PATH/', monitor='val_accuracy', save_best_only=True, verbose=0),
         callbacks.EarlyStopping(monitor='val_accuracy', patience=4, verbose=0)]
 
     # compile the model
