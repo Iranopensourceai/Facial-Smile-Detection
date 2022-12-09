@@ -44,4 +44,4 @@ if __name__ == "__main__":
     # compile the model
     model = compile_model(model) 
     # train the model   
-    model.fit(augmentation(train_X), train_y, epochs=args.n, batch_size=32, validation_data=(test_X, test_y), callbacks=Callbacks)
+    model.fit(train_X, train_y, epochs=args.n, batch_size=32, validation_data=(test_X, test_y), callbacks=Callbacks)
