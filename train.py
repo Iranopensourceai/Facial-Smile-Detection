@@ -5,6 +5,7 @@ import argparse
 from imutils import paths
 from preprocessing import *
 from model import *
+from evaluation import *
 import tensorflow as tf
 from tensorflow.keras import callbacks
 tf.get_logger().setLevel('ERROR')
@@ -44,4 +45,11 @@ if __name__ == "__main__":
     # compile the model
     model = compile_model(model) 
     # train the model   
-    model.fit(train_X, train_y, epochs=args.n, batch_size=32, validation_data=(test_X, test_y), callbacks=Callbacks)
+    History = model.fit(train_X, train_y, epochs=args.n, batch_size=32, validation_data=(test_X, test_y), callbacks=Callbacks)
+    
+    # Model evaluation
+    # plot train/validation loss/accuracy figures
+    plot_history(History, epoch=args.n, metric='accuracy')
+    plot_history(History, epoch=args.n, metric='loss')
+    # print metrics
+    print_evaluation_metrics(model, test_X, test_y)
