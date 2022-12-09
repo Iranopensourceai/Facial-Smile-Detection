@@ -13,21 +13,27 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.layers.experimental import preprocessing
 
 
-# train test split
 def path_split(dataset_path, seed=432):
     """
-    Splits images paths in the dataset to train and test 
-    dataset_path: the path of dataset
-    seed: the seed required to random shuffle files
+    Extracts image paths existing in the dataset and then splits to train, validation and test sets.
+    :param dataset_path: the path of dataset
+    :param seed: the seed required to random shuffle files
+    :return: 
     """
     imgpaths = list(paths.list_images(dataset_path))
     train_path, test_path = train_test_split(imgpaths, test_size=0.15, random_state=seed, shuffle=True)
-    
     return train_path, test_path
 
 
-# Preprocessing and Labeling
-def dataextractor(image_paths, img_height, img_width, gray=True):
+def data_extractor(image_paths, img_height, img_width, gray=True):
+    """
+    This function reads the image existing in the input path and 
+    doing some preprocessing operations on it.besides extracts the image label them.
+    :param image_paths: the input image path
+    :param height: resized image height
+    :param width: resized image width
+    :return: image and label arrays
+    """
     data=[]
     labels = []
     for imagepath in image_paths:
