@@ -1,17 +1,11 @@
 # Importing necessary libraries 
 from tensorflow.keras import Sequential, layers
-from configparser import ConfigParser
 
-# Reading Configuration Files
-config = ConfigParser()
-config.read("config.ini")
-
-config_data = config["DEFAULT"]
 
 # defining the Convolutional Neural Network
-def initialize_model():
+def initialize_model(imgs_height, imgs_width, n_channels):
     model = Sequential()
-    model.add(layers.Conv2D(32, (3, 3), activation="relu", input_shape=(int(config_data["image_height"]), int(config_data["image_width"]), int(config_data["image_depth"])), padding='same'))
+    model.add(layers.Conv2D(32, (3, 3), activation="relu", input_shape=(imgs_height, imgs_width, n_channels), padding='same'))
     model.add(layers.MaxPool2D(pool_size=(2, 2)))
     model.add(layers.Conv2D(64, (3, 3), activation="relu", padding='same'))
     model.add(layers.MaxPool2D(pool_size=(2, 2)))
