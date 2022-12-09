@@ -5,7 +5,9 @@ import argparse
 from imutils import paths
 from preprocessing import *
 from model import *
+import tensorflow as tf
 from tensorflow.keras import callbacks
+tf.get_logger().setLevel('ERROR')
 
 
 # argparse
