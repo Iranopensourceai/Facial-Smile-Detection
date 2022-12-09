@@ -17,30 +17,30 @@ from imutils import paths
 import cv2
 import os
 from sklearn.model_selection import train_test_split
-from config_file import *
+
 
 
 def train_val_test_split(dataset_path, seed=432):
     """
-    Splits images paths in the dataset to train, validation and test 
+    Splits images paths in the dataset to train and test 
     dataset_path: the path of dataset
     seed: the seed required to random shuffle files
     """
     imgpaths = list(paths.list_images(dataset_path))
-    train_val_path, test_path = train_test_split(imgpaths, test_size=0.1, random_state=seed, shuffle=True)
-    train_path, validation_path = train_test_split(train_val_path, test_size=0.2)
+    train_path, test_path = train_test_split(imgpaths, test_size=0.15, random_state=seed, shuffle=True)
     
-    return train_path, validation_path, test_path
+    return train_path, test_path
 
 
-def dataextractor(image_paths,height=32,width=32):
+def dataextractor(image_paths, img_height, img_width, gray=True):
     data=[]
     labels = []
 #     imagepaths = list(paths.list_images(data_path))
     for imagepath in image_paths:
         image = cv2.imread(imagepath)
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        image = cv2.resize(image,(height, width),interpolation=cv2.INTER_AREA)
+        if gray:
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        image = cv2.resize(image,(img_height, img_width),interpolation=cv2.INTER_AREA)
         image = img_to_array(image)
         label = imagepath.split(os.sep)[-2]
         label = int(label)
@@ -54,30 +54,9 @@ def dataextractor(image_paths,height=32,width=32):
 
 def augmentation(img, training=True):
     return keras.Sequential([
-    preprocessing.RandomContrast(factor=0.5),
+    preprocessing.RandomContrast(factor=0.3),
     preprocessing.RandomFlip(mode='horizontal'), # meaning, left-to-right
-    preprocessing.RandomFlip(mode='vertical'), # meaning, top-to-bottom
     preprocessing.RandomWidth(factor=0.15), # horizontal stretch
     preprocessing.RandomRotation(factor=0.20),
     preprocessing.RandomTranslation(height_factor=0.1, width_factor=0.1)])(img, training)
-
-
-
-if __name__ == "main":
-  train_path, val_path, test_path = train_val_test_split(dataset_path)
-
-  train_X, train_y =dataextractor(train_path)
-  val_X, val_y = dataextractor(val_path)
-  test_X, test_y = dataextractor(test_path)
-
-  ex = train_X[100]
-
-  plt.figure(figsize=(10,10))
-  for i in range(16):
-      image = augmentation(ex)
-  #     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-  #     image = img_to_array(image)
-      plt.subplot(4, 4, i+1)
-      plt.imshow(tf.squeeze(image) )
-      plt.axis('off')
-  plt.show()
+    
