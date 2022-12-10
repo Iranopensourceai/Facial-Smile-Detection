@@ -9,7 +9,6 @@ from sklearn.model_selection import train_test_split
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.layers.experimental import preprocessing
 
 
@@ -41,7 +40,6 @@ def data_extractor(image_paths, img_height, img_width, gray=True):
         if gray:
             image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         image = cv2.resize(image,(img_height, img_width),interpolation=cv2.INTER_AREA)
-        image = img_to_array(image)
         label = imagepath.split(os.sep)[-2]
         label = int(label)
         labels.append(label)

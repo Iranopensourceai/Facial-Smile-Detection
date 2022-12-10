@@ -2,7 +2,6 @@
 import os
 import pathlib
 import argparse
-from imutils import paths
 from preprocessing import *
 from model import *
 import tensorflow as tf
@@ -36,12 +35,13 @@ if __name__ == "__main__":
         model = initialize_model(args.e, args.w, 3)
 
     # Callbacks
-    os.mkdir('MODEL_PATH')
-    Callbacks = [
-        callbacks.ModelCheckpoint('MODEL_PATH/', monitor='val_accuracy', save_best_only=True, verbose=0),
-        callbacks.EarlyStopping(monitor='val_accuracy', patience=4, verbose=0)]
+    Callbacks = [callbacks.EarlyStopping(monitor='val_accuracy', patience=4, verbose=0)]
 
     # compile the model
     model = compile_model(model) 
     # train the model   
     model.fit(train_X, train_y, epochs=args.n, batch_size=32, validation_data=(test_X, test_y), callbacks=Callbacks)
+
+    # save the model
+    os.mkdir('MODEL_PATH')
+    model.save('MODEL_PATH/model.h5')
