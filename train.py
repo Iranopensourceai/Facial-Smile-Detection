@@ -48,10 +48,10 @@ if __name__ == "__main__":
     History = model.fit(train_X, train_y, epochs=args.n, batch_size=32, validation_data=(test_X, test_y), callbacks=Callbacks)
     
     # Model evaluation
-    test_loss , test_accuracy , test_precision , test_recall = model.evaluate(x=test_X , y=test_y)
     
     # plot train/validation loss/accuracy figures
     plot_history(History, epoch=args.n, metric='accuracy')
     plot_history(History, epoch=args.n, metric='loss')
     # print metrics
     print_evaluation_metrics(model, test_X, test_y)
+    print_metrics(model, test_X, test_Y)
