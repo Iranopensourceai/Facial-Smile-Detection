@@ -23,5 +23,5 @@ def initialize_model(imgs_height, imgs_width, n_channels):
 def compile_model(model):
     model.compile(optimizer='adam',
                   loss='binary_crossentropy',
-                  metrics=['accuracy'])
+                  metrics=['accuracy','precision','recall'])
     return model
