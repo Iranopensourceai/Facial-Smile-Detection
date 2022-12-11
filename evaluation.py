@@ -28,3 +28,11 @@ def print_evaluation_metrics(model, test_X, test_Y):
       print('\n',classification_report(test_Y, predictions, target_names=['non smile','smile']))
       print('\n       -----------------     ')
       print("\nAUC: ",metrics.roc_auc_score(test_Y, predictions))
+
+      
+def print_metrics(model, test_X, test_Y):
+      test_loss , test_accuracy , test_precision , test_recall = model.evaluate(x=test_X , y=test_y)
+      print('\n test_loss = '+ str(test_loss) + 
+           '\n test_accuracy = '+ str(test_accuracy) +
+           '\n test_precision = '+ str(test_precision) +
+           '\n test_recall = '+ str(test_recall))
