@@ -33,14 +33,20 @@ def data_extractor(image_paths, img_height, img_width, gray=True):
     :param width: resized image width
     :return: image and label arrays
     """
-    data=[]
+    data = []
     labels = []
-    for imagepath in image_paths:
-        image = cv2.imread(imagepath)
+    for img_path in image_paths:
+        image = cv2.imread(img_path)
         if gray:
             image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         image = cv2.resize(image,(img_height, img_width),interpolation=cv2.INTER_AREA)
-        label = imagepath.split(os.sep)[-2]
+        label = img_path.split(os.sep)[-2]
+        # Convert label to number
+        if label == 'smile':
+            label = 1
+        else:
+            label = 0
+            
         label = int(label)
         labels.append(label)
         data.append(image)
