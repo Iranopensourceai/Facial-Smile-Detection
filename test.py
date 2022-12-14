@@ -20,12 +20,16 @@ args = parser.parse_args()
 
 # Pre-processing for test images
 def test_preprocessing(img_path, gray=True):
-    image = cv2.imread(img_path)
+    image = cv2.imread(str(img_path))
     if gray:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = cv2.resize(image, (args.e, args.w), interpolation=cv2.INTER_AREA)
     image = image / 255.0
-    return np.expand_dims(image, axis=0)
+    print(image.shape)
+    if gray:
+        return np.expand_dims(image, axis=[0, -1])
+    else:
+        return np.expand_dims(image, axis=0)
 
 
 if __name__ == "__main__":
