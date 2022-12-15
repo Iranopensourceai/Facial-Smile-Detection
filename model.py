@@ -1,23 +1,33 @@
 # Importing necessary libraries 
 from preprocessing import *
 from tensorflow.keras import Sequential, layers
+from tensorflow.keras.applications.vgg19 import VGG19
+from tensorflow.keras.layers.experimental.preprocessing import Resizing
 
 
-# defining the Convolutional Neural Network
+
 def initialize_model(imgs_height, imgs_width, n_channels):
-    model = Sequential()
-    model.add(augmentation_layer(imgs_height, imgs_width, n_channels))
-    model.add(layers.Conv2D(32, (3, 3), activation="relu", padding='same'))
-    model.add(layers.MaxPool2D(pool_size=(2, 2)))
-    model.add(layers.Conv2D(64, (3, 3), activation="relu", padding='same'))
-    model.add(layers.MaxPool2D(pool_size=(2, 2)))
-    model.add(layers.Conv2D(128, (3, 3), activation="relu", padding='same'))
-    model.add(layers.Conv2D(64, (3, 3), activation="relu", padding='same'))
-    model.add(layers.GlobalAveragePooling2D())
-    model.add(layers.Dropout(rate=0.2))
-    model.add(layers.Dense(1, activation='sigmoid'))
+    vgg = VGG19(include_top=False, weights='imagenet', input_shape=(imgs_height, imgs_width, n_channels))
 
-    return model
+    for layer in vgg.layers:
+        layer.trainable = False
+
+    input_ = keras.Input(shape=(imgs_height, imgs_width, n_channels))
+    x = augmentation_layer()(input_)
+    x = Resizing(imgs_height, imgs_width)(x)
+
+    layers = vgg.layers[1:]
+    for layer in layers:
+        x = layer(x)
+
+    x = layers.Flatten()(x)
+    x = layers.Dropout(0.1)(x)
+    x = layers.Dense(300, activation='relu')(x)
+    x = layers.Dropout(0.1)(x)
+    prediction = layers.Dense(1, activation='sigmoid')(x)
+
+    return keras.Model(inputs=input_, outputs=prediction)
+
 
 # defining a function for compile the model
 def compile_model(model):

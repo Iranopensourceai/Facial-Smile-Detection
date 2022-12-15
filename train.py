@@ -7,6 +7,8 @@ from model import *
 import tensorflow as tf
 from tensorflow.keras import callbacks
 tf.get_logger().setLevel('ERROR')
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID" 
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 
 # argparse
