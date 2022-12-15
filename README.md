@@ -15,6 +15,14 @@
 - [Results](#Results)
 
 ## Overview     <a name="Overview"></a>
+What makes a face more excellent? It could be a smile. So, in this project, we have worked on Smile detection using CNN & model sequential to train the model.
+**Requirements:**
+Before going deeper, you must install Python +3.6 & the following packages to run the code:
+
+- CV2: pip install OpenCV-python
+- Matplotlib: pip install matplotlib
+- Tensorflow: pip install TensorFlow
+- Sklearn: pip install scikit-learn
 
 ## Datasets     <a name="Datasets"></a>
 
