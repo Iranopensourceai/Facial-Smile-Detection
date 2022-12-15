@@ -16,8 +16,8 @@ def initialize_model(imgs_height, imgs_width, n_channels):
     x = augmentation_layer()(input_)
     x = Resizing(imgs_height, imgs_width)(x)
 
-    layers = vgg.layers[1:]
-    for layer in layers:
+    vgg_layers = vgg.layers[1:]
+    for layer in vgg_layers:
         x = layer(x)
 
     x = layers.Flatten()(x)
