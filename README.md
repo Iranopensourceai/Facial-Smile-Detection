@@ -12,6 +12,7 @@
 - [Model](#Model)
     - [Building the model](#Building_model)
     - [Training](#Training)
+- [Usage](#Usage)
 - [Results](#Results)
 
 ## Overview     <a name="Overview"></a>
@@ -72,6 +73,24 @@ The CNN that is composed of:
 * [![Keras][Keras.io]][Keras-url] 2.9.0
 * [![Opencv][Opencv.org]][Opencv-url]  4.6.0
 * [![Numpy][numpy.org]][numpy-url] 1.21.6
+        
+        
+        
+## Usage                <a name="Usage"></a>
+ 
+First, scrap dataset with:
+```
+python web-scraping.py 'data/urls.csv' 'data/haarcascade_frontalface_default.xml'
+```
+To train the model with scraped dataset:
+```
+python train.py 'Dataset' 100 -w 128 -e 128
+```
+To test with an existing model:
+```
+python test.py 'jadi.jpg' -w 128 -e 128
+```
+
 
 
 ## Results              <a name="Results"></a>
