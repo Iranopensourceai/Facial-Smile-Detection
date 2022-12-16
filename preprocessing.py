@@ -2,7 +2,6 @@
 import os
 import cv2
 import glob
-import argparse
 import numpy as np
 from sklearn.model_selection import train_test_split
 
@@ -13,6 +12,11 @@ from tensorflow.keras.layers.experimental import preprocessing
 
 
 def get_images_path(dataset_path):
+    """
+    Extract image paths
+    :param dataset_path: dataset path
+    :return: list of image paths
+    """
     list_path = []
     for img_path in glob.glob(f'/{dataset_path}/*/*'):
         list_path.append(img_path)
@@ -26,8 +30,8 @@ def path_split(dataset_path, seed=432):
     :param seed: the seed required to random shuffle files
     :return: 
     """
-    imgpaths = get_images_path(dataset_path)
-    train_path, test_path = train_test_split(imgpaths, test_size=0.15, random_state=seed, shuffle=True)
+    img_paths = get_images_path(dataset_path)
+    train_path, test_path = train_test_split(img_paths, test_size=0.15, random_state=seed, shuffle=True)
     return train_path, test_path
 
 
@@ -36,18 +40,19 @@ def data_extractor(image_paths, img_height, img_width, gray=True):
     This function reads the image existing in the input path and 
     doing some preprocessing operations on it.besides extracts the image label them.
     :param image_paths: the input image path
-    :param height: resized image height
-    :param width: resized image width
+    :param img_height: resized image height
+    :param img_width: resized image width
+    :param gray: if True set image gray scale else not
     :return: image and label arrays
     """
-    data=[]
+    data = []
     labels = []
-    for imagepath in image_paths:
-        image = cv2.imread(imagepath)
+    for img_path in image_paths:
+        image = cv2.imread(img_path)
         if gray:
             image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         image = cv2.resize(image,(img_height, img_width),interpolation=cv2.INTER_AREA)
-        label = imagepath.split(os.sep)[-2]
+        label = img_path.split(os.sep)[-2]
         label = int(label)
         labels.append(label)
         data.append(image)
@@ -57,11 +62,16 @@ def data_extractor(image_paths, img_height, img_width, gray=True):
         return np.array(data)/255.0, np.array(labels)
 
 
-# Data augmentation layer
 def augmentation_layer():
-    return tf.keras.Sequential([                        
-    preprocessing.RandomFlip('horizontal'),
-    preprocessing.RandomContrast(factor=0.3),
-    preprocessing.RandomWidth(factor=0.15),
-    preprocessing.RandomRotation(factor=0.20),
-    preprocessing.RandomTranslation(height_factor=0.1, width_factor=0.1)])
+    """
+    Creates Augmentation layer to produce extra data for boosting classifier.
+    Including in the model to use GPU instead of CPU for speeding up computations.
+    :return: Fake data
+    """
+    return Sequential([
+        preprocessing.RandomFlip('horizontal'),
+        preprocessing.RandomContrast(factor=0.3),
+        preprocessing.RandomWidth(factor=0.15),
+        preprocessing.RandomRotation(factor=0.20),
+        preprocessing.RandomTranslation(height_factor=0.1, width_factor=0.1)
+    ])

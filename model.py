@@ -5,8 +5,15 @@ from tensorflow.keras.applications.vgg19 import VGG19
 from tensorflow.keras.layers.experimental.preprocessing import Resizing
 
 
-
 def initialize_model(imgs_height, imgs_width, n_channels):
+    """
+    imports the VGG model's top layers except input and classification layer, and set trainable to False
+    then added the custom input and classifier layer
+    :param imgs_height: input image height
+    :param imgs_width: input image width
+    :param n_channels: input image channels
+    :return: a VGG model
+    """
     vgg = VGG19(include_top=False, weights='imagenet', input_shape=(imgs_height, imgs_width, n_channels))
 
     for layer in vgg.layers:

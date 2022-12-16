@@ -11,7 +11,7 @@ tf.get_logger().setLevel('ERROR')
 
 # argparse
 parser = argparse.ArgumentParser(description='Process command line arguments.')
-parser.add_argument("p", help="test image path", type=pathlib.Path)
+parser.add_argument("-p", help="test image path", type=pathlib.Path)
 parser.add_argument("-w", help="width of image", type=int, default=128)
 parser.add_argument("-e", help="height of image", type=int, default=128)
 parser.add_argument("-g", help="gray images", action='store_true')

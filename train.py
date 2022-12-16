@@ -7,19 +7,18 @@ from model import *
 import tensorflow as tf
 from tensorflow.keras import callbacks
 tf.get_logger().setLevel('ERROR')
-os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID" 
-os.environ["CUDA_VISIBLE_DEVICES"]="0"
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
 # argparse
 parser = argparse.ArgumentParser(description='Process command line arguments.')
-parser.add_argument("d", help="data folder path", type=pathlib.Path)
-parser.add_argument("n", help="number of epochs", type=int)
+parser.add_argument("-d", help="data folder path", type=pathlib.Path)
+parser.add_argument("-n", help="number of epochs", type=int)
 parser.add_argument("-w", help="width of images", type=int, default=128)
 parser.add_argument("-e", help="height of images", type=int, default=128)
 parser.add_argument("-g", help="gray images", action='store_true')
 args = parser.parse_args()
-
 
 
 if __name__ == "__main__":
@@ -31,9 +30,9 @@ if __name__ == "__main__":
     test_X, test_y = data_extractor(test_path, args.e, args.w, args.g)
 
     # if args.g is set to true, the images will be grayed out and the model will receive images with 1 channel
-    if args.g == True:
+    if args.g:
         model = initialize_model(args.e, args.w, 1)
-    elif args.g == False:
+    elif not args.g:
         model = initialize_model(args.e, args.w, 3)
 
     # Callbacks
