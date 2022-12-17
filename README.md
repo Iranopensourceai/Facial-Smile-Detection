@@ -12,8 +12,12 @@
 - [Model](#Model)
     - [Building the model](#Building_model)
     - [Training](#Training)
+- [Built with](#Built_with)
 - [Usage](#Usage)
 - [Results](#Results)
+- [Conclusion](#Conclusion)
+- [Contributing](#Contributing)
+- [References](#References)
 
 ## Overview     <a name="Overview"></a>
 
@@ -67,7 +71,7 @@ The CNN that is composed of:
 <br>
 <br>
 
-## Built with           <a name="Built with"></a>
+## Built with           <a name="Built_with"></a>
 * [![Python][Python.org]][Python-url] 3.8.16 
 * [![Tensorflow][Tensorflow.org]][Tensorflow-url] 2.9.2
 * [![Keras][Keras.io]][Keras-url] 2.9.0
@@ -100,7 +104,7 @@ The model is trained on the mentioned dataset and the results are as follows.
 The plots show the (train - validation Accuracy) and (train - validation Loss) under 60 epochs.
 
 <p align="center">
-<img align="center" width="33%" src="https://github.com/Iranopensourceai/Facial-Smile-Detection/blob/result/figs/plots.png">     
+<img align="center" width="33%" src="https://github.com/Iranopensourceai/Facial-Smile-Detection/blob/main/figs/plots.png">     
 </p>
 
 ### Evaluation metrics     <a name="Evaluation metrics"></a>
@@ -142,13 +146,13 @@ An explanation of some metrics for evaluating classification models is provided 
 Check the accuracy of smile detection:
 
 <p align="center">
-<img align="center" width="33%" src="https://github.com/Iranopensourceai/Facial-Smile-Detection/blob/result/figs/test_smile.jpg">     
+<img align="center" width="33%" src="https://github.com/Iranopensourceai/Facial-Smile-Detection/blob/main/figs/test_smile.jpg">     
 </p>
 
 Check the accuracy of non smile detection:
 
 <p align="center">
-<img align="center" width="33%" src="https://github.com/Iranopensourceai/Facial-Smile-Detection/blob/result/figs/test_nonsmile.jpg">     
+<img align="center" width="33%" src="https://github.com/Iranopensourceai/Facial-Smile-Detection/blob/main/figs/test_nonsmile.jpg">     
 </p>
 
 ## Conclusion       <a name="Contributing"></a>
