@@ -20,6 +20,14 @@
 - [References](#References)
 
 ## Overview     <a name="Overview"></a>
+What makes a face more excellent? It could be a smile. So, in this project, we have worked on Smile detection using CNN & model sequential to train the model.
+**Requirements:**
+Before going deeper, you must install Python +3.6 & the following packages to run the code:
+
+- CV2: pip install OpenCV-python
+- Matplotlib: pip install matplotlib
+- Tensorflow: pip install TensorFlow
+- Sklearn: pip install scikit-learn
 
 ## Datasets     <a name="Datasets"></a>
 
@@ -37,8 +45,18 @@ Here are the steps we have followed;
 
 
 ## Model       <a name="Model"></a>
-<img align="left" width="33%" src="https://github.com/Iranopensourceai/Facial-Smile-Detection/blob/main/figs/model.JPG">     
-     
+<img align="left" width="33%" src="https://github.com/Iranopensourceai/Facial-Smile-Detection/blob/main/figs/model.JPG"><br>
+
+
+- Use"Keras" deep learning python tool
+- Backend is "Tensorflow"
+- Class of deep neural network is "CNN"
+- Define the sequential model
+- Add layers to the model for better accuracy
+- Compile
+- Save model
+
+
 ### Building the model     <a name="Building_model"></a>
 The CNN that is composed of:
 
@@ -55,29 +73,36 @@ The CNN that is composed of:
 
 
 ### Training            <a name="Training"></a>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+Using the "argparse" library in order to have this arguments:
+
+- "data folder path"
+
+- "Number of epochs"
+
+- "width of images"
+
+- "height of images"
+
+- "gray images"
+
+- Get image paths and split them into train and test
+
+- Preprocessing and Labeling
+
+- Callbacks(EarlyStopping) to prevent overfitting of the model's training.
+
+- Compile the model by Using
+
+- optimizer->'adam'
+
+- loss->'binary_crossentropy'
+
+- metrics->' accuracy'
+
+- Train the model with batch_size =32
+
+- Save the Model
 
 ## Built with           <a name="Built_with"></a>
 * [![Python][Python.org]][Python-url] 3.8.16 
