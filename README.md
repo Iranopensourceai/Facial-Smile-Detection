@@ -24,6 +24,14 @@
 ## Datasets     <a name="Datasets"></a>
 
 ## Preprocessing     <a name="Preprocessing"></a>
+[It is a data mining technique that transforms raw data into an understandable format. Raw data (real world data) is always incomplete and that data cannot be sent through a model. That would cause certain errors. That is why we need to preprocess data before sending through a model.
+Steps in Data Preprocessing
+Here are the steps we have followed;
+1. Import libraries
+2. Read data
+3.  Augmentations.
+4.  for more information please check this link(Data Preprocessin-arash.docx)]
+
 - ### image preprocessing      <a name="image_preprocessing"></a>
 - ### image augmentation       <a name="image_augmentation"></a>
 
